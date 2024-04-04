@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import "../styles/main.scss";
 import { inter, roboto } from "./(back-office)/utils/Fonts";
 
@@ -9,7 +10,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${roboto}`}>{children}</body>
+      <body className={`${roboto}`}>
+        {children}
+        <Toaster position="top-center" reverseOrder={false} />
+      </body>
     </html>
   );
 }

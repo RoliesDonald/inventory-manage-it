@@ -1,169 +1,66 @@
 "use client";
+import AddInventoryForm from "@/components/dashboard/AddInventoryForm";
 import FormHeader from "@/components/dashboard/FormHeader";
-import SelectInput from "@/components/form-input/SelectInput";
-import SubmitBtn from "@/components/form-input/SubmitBtn";
-import TextArea from "@/components/form-input/TextArea";
-import TextInput from "@/components/form-input/TextInput";
+import TransferInventoryForm from "@/components/dashboard/TransferInventoryForm";
+
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 
 export default function NewAdjustment() {
-  const warehouseOptions = [
+  const tabs = [
     {
-      label: "Main Warehouse",
-      value: "main warehouse",
+      title: "Add New",
     },
     {
-      label: "Branch Warehouse",
-      value: "branch warehouse",
+      title: "Transfer",
     },
   ];
-
-  const brandOptions = [
-    {
-      defaultValue: "select",
-      label: "Mitsubishi",
-      value: "mitsubishi",
-    },
-    {
-      label: "Isuzu",
-      value: "isuzu",
-      defaultValue: "select",
-    },
-  ];
-  const itemOptions = [
-    {
-      label: "Filter Oli",
-      value: "oilfilter",
-    },
-    {
-      label: "Plat Kopling",
-      value: "platkopling",
-    },
-  ];
-  const categotyOptions = [
-    {
-      label: "Electrical",
-      value: "electrical",
-    },
-    {
-      label: "Engine",
-      value: "engine",
-    },
-    {
-      label: "Lubrican",
-      value: "lubrican",
-    },
-  ];
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm();
-  const [loading, setLoading] = useState(false);
-
-  async function onSubmit(data) {
-    console.log(data);
-    setLoading(true);
-    const baseURL = "http://localhost:3000";
-    try {
-      const response = await fetch(`${baseURL}/api/warehouse`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (response.ok) {
-        console.log(response);
-        setLoading(false);
-        reset();
-      }
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-    }
-  }
-
   return (
-    <div className="justify-between w-full p-4 border-b border-gray-200  dark:border-gray-600">
+    <div className=" justify-normal w-full p-4 dark:border-gray-600 lg:pr-4 md:pr-4">
       {/* Header */}
       <FormHeader
         title="Inventory Adjusment"
-        href="/dashboard-inventory/inventory/adjusment"
+        href="/dashboard-inventory/inventory/adjustment"
       />
       {/* Form */}
-      <div className="relative p-4 w-full h-full md:h-auto">
-        <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
-          <div className="text-slate-50 mb-2 text-lg text-center pb-2 flex justify-center">
-            <h2 className="p-1 bg-blue-500 rounded-lg px-6">
-              adjusment No. : req-00020/14/XI/2024
-            </h2>
-          </div>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:gap-4">
-              <SelectInput
-                label="Category"
-                name="category"
-                register={register}
-                errors={errors}
-                className="w-full"
-                options={categotyOptions}
-              />
-              <SelectInput
-                label="Brand"
-                name="brand"
-                register={register}
-                errors={errors}
-                className="w-full"
-                options={brandOptions}
-              />
-              <SelectInput
-                label="Item Name"
-                name="type"
-                register={register}
-                errors={errors}
-                className="w-full"
-                options={itemOptions}
-              />
-              <TextInput
-                lable="Amount to Transfer"
-                name="transferStockQty"
-                register={register}
-                type="number"
-                errors={errors}
-                className="w-full"
-              />
-              <SelectInput
-                label="Transfer from :"
-                name="transferfrom"
-                register={register}
-                errors={errors}
-                className="w-full"
-                options={warehouseOptions}
-              />
-              <SelectInput
-                label="Transfer to :"
-                name="transferto"
-                register={register}
-                errors={errors}
-                className="w-full"
-                options={warehouseOptions}
-              />
-            </div>
 
-            <TextArea
-              label="Adjustment Notes"
-              name="notes"
-              register={register}
-              errors={errors}
-              className="mt-4"
-            />
-            <SubmitBtn isLoading={loading} title="Create New Adjusment" />
-          </form>
-        </div>
+      <div className="w-full rounded-lg sm:px-6 md:px-8  dark:border-gray-700 mx-auto my-3">
+        <ul class=" text-sm mt-2 font-medium text-center text-gray-500 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+          {tabs.map((tab, i) => {
+            return (
+              <li class="w-full focus-within:z-10" key={i}>
+                <button
+                  href="#"
+                  className="inline-block w-full p-4 text-gray-900  bg-gray-100 border-r border-gray-200 dark:border-gray-700 rounded-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white hover:text-gray-700 hover:bg-gray-500"
+                  aria-current="page"
+                >
+                  {tab.title}
+                </button>
+              </li>
+            );
+          })}
+
+          {/* <li class="w-full focus-within:z-10">
+            <button
+              href="#"
+              class="inline-block w-full p-4 text-gray-900  bg-gray-100 border-r border-gray-200 dark:border-gray-700 rounded-s-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
+              aria-current="page"
+            >
+              Add New
+            </button>
+          </li>
+          <li class="w-full focus-within:z-10">
+            <button
+              href="#"
+              class="inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 rounded-e-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+            >
+              Transfer
+            </button>
+          </li> */}
+        </ul>
       </div>
+
+      <TransferInventoryForm />
+      <AddInventoryForm />
 
       {/* Bottom */}
     </div>

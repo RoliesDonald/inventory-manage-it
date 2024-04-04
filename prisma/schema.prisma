@@ -13,8 +13,86 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// model User {
+//   id            String    @id @default(auto()) @map("_id") @db.ObjectId
+//   email         String    @unique()
+//   password      String
+//   name          String
+//   registered_by String?
+//   user_type     Int       @default(0)
+//   status        Int       @default(0)
+//   ip            String?
+//   last_login_at DateTime?
+//   created_at    DateTime?
+//   updated_at    DateTime? @default(now())
+//   deleted_at    DateTime?
+// }
+
 model Category {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   description String?
+  Items       Items[]
+}
+
+model Unit {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  abreviation String
+}
+
+model Brand {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+}
+
+model Items {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  partName     String
+  partNum      String
+  partBrand    String
+  category     Category @relation(fields: [categoryId], references: [id])
+  categoryId   String   @db.ObjectId
+  barcode      String
+  sku          String
+  quantity     Int
+  itemUnit     String
+  isRetail     Boolean
+  itemAmount   Int
+  buyPrice     Int
+  sellPrice    Int
+  reOrderPoint Int
+  supplierName String
+  isTax        Boolean
+  taxRate      Int
+  warehuse     String
+  itemNote     String
+  itemDesc     String
+  itemImg      String[] @db.String
+}
+
+model Warehouse {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  warehouseType String
+  province      String
+  city          String
+  distric       String
+  subDistric    String
+  detail        String
+  Adjusment     Adjusment[]
+}
+
+model Adjusment {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  category       String
+  brand          String
+  itemName       String
+  amountTransfer Float
+  warehouse      Warehouse @relation(fields: [warehouseId], references: [id])
+  warehouseId    String    @db.ObjectId
+  transferfrom   String
+  transferto     String
+  notes          String
 }

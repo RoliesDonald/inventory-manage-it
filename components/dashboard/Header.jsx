@@ -10,6 +10,13 @@ import {
 import React from "react";
 import SearchField from "./SearchField";
 import Image from "next/image";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function Header() {
   return (
@@ -22,12 +29,7 @@ export default function Header() {
         }
         {<SearchField />}
       </div>
-      <div className="flex items-center gap-3">
-        <div className="pr-4 border-r-2 border-gray-300">
-          <button className="p-[3px] bg-blue-500 text-neutral-50 hover:text-blue-700 rounded-lg hover:rounded-full hover:bg-white">
-            <Plus size={18} />
-          </button>
-        </div>
+      <div className="flex items-center gap-3 ">
         <div className="flex pr-3 border-r-2 border-gray-300 space-x-2">
           <button className="p-[5px] hover:bg-slate-300 hover:rounded-lg">
             <Users size={18} className="text-slate-800" />
@@ -40,19 +42,28 @@ export default function Header() {
           </button>
         </div>
         <div className="flex gap-4">
-          <button className="flex items-center">
+          <Select className="bg-slate-950">
+            <SelectTrigger className="w-[180px] bg-slate-50">
+              <SelectValue placeholder="Rolies Donald" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="light">Setting</SelectItem>
+              <SelectItem value="dark">Log Out</SelectItem>
+            </SelectContent>
+          </Select>
+          {/* <button className="flex items-center">
             <span className="text-slate-500">Rolies Donal</span>
             <ChevronDown className="w-5 h-5 text-slate-500" />
-          </button>
-          <button className="flex items-center">
-            <Image
-              alt="img user default"
-              src="/images/profile-default.png"
-              height={96}
-              width={96}
-              className="rounded-full h-8 w-8 border border-slate-400"
-            />
-          </button>
+          </button> */}
+
+          <Image
+            alt="img user default"
+            src="/images/profile-default.png"
+            height={96}
+            width={96}
+            className="rounded-full h-8 w-8 border border-slate-400 flex items-center justify-center"
+          />
+
           <button className="flex items-center">
             <LayoutGrid className="w-5 h-5 text-slate-500" />
           </button>

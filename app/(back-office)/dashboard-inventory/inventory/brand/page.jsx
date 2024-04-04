@@ -1,3 +1,4 @@
+import HeaderList from "@/components/dashboard/HeaderList";
 import React from "react";
 
 export default function Brand() {

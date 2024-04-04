@@ -143,7 +143,7 @@ export default function SideBar() {
     },
   ];
   return (
-    <div className="w-60 min-h-screen bg-slate-800 text-slate-200 fixed flex flex-col">
+    <div className="w-60 sm:h-full min-h-screen bg-slate-800 text-slate-200 fixed flex flex-col">
       {/* top sidebar or logo */}
       <div className="flex flex-col ">
         {/* logo */}
@@ -159,7 +159,7 @@ export default function SideBar() {
               alt="logo"
             />
             <span className="font-semibold text-red-500 text-[18px]">
-              Atur Aje
+              Kampak Jaya
             </span>
           </div>
         </Link>
