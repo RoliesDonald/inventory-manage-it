@@ -6,7 +6,6 @@ export default function SelectInput({
   register,
   className = "xs:col-span-2",
   options = [],
-  selected = "select...",
 }) {
   return (
     <div className={className}>
@@ -22,12 +21,11 @@ export default function SelectInput({
           id={name}
           name={name}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          defaultValue={selected}
         >
-          {options.map((option, i, selected) => {
+          {options.map((option, i) => {
             return (
-              <option key={i} value={option.value}>
-                {option.value}
+              <option key={i} value={option.id}>
+                {option.title}
               </option>
             );
           })}

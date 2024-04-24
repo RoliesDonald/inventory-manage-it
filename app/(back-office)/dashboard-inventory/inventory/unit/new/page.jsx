@@ -3,8 +3,10 @@ import FormHeader from "@/components/dashboard/FormHeader";
 import SubmitBtn from "@/components/form-input/SubmitBtn";
 import TextArea from "@/components/form-input/TextArea";
 import TextInput from "@/components/form-input/TextInput";
+import { makeApiRequest } from "@/lib/apiRequest";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 export default function NewUnit() {
   const {
@@ -19,22 +21,7 @@ export default function NewUnit() {
   async function onSubmit(data) {
     console.log(data);
     setLoading(true);
-    const baseURL = "http://localhost:3000";
-    try {
-      const response = await fetch(`${baseURL}/api/categories`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (response.ok) {
-        console.log(response);
-        setLoading(false);
-        reset();
-      }
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-    }
+    makeApiRequest(setLoading, "api/units", data, "Unit", reset);
   }
   return (
     <div className="justify-between w-full p-4 border-b border-gray-200 dark:border-gray-600">

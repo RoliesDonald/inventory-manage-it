@@ -4,60 +4,62 @@ import SelectInput from "@/components/form-input/SelectInput";
 import SubmitBtn from "@/components/form-input/SubmitBtn";
 import TextArea from "@/components/form-input/TextArea";
 import TextInput from "@/components/form-input/TextInput";
+import { makeApiRequest } from "@/lib/apiRequest";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 export default function NewWarehouse() {
   const warehouseOption = [
     {
-      label: "Main Warehouse",
+      title: "Main Warehouse",
       value: "Main Warehouse",
     },
     {
-      label: "Branch Warehouse",
+      title: "Branch Warehouse",
       value: "Branch Warehouse",
     },
   ];
 
   const province = [
     {
-      label: "DKI Jakarta",
+      title: "DKI Jakarta",
       value: "DKI Jakarta",
     },
     {
-      label: "Jawa Tengah",
+      title: "Jawa Tengah",
       value: "Jawa Tengah",
     },
   ];
 
   const city = [
     {
-      label: "Jakarta Timur",
+      title: "Jakarta Timur",
       value: "Jakarta Timur",
     },
     {
-      label: "Semarang",
+      title: "Semarang",
       value: "Semarang",
     },
   ];
 
   const distric = [
     {
-      label: "Cipinang",
+      title: "Cipinang",
       value: "Cipinang",
     },
     {
-      label: "Kp. Melayu",
+      title: "Kp. Melayu",
       value: "Kp. Melayu",
     },
   ];
-  const subdistric = [
+  const subDistric = [
     {
-      label: "Duren Sawit",
+      title: "Duren Sawit",
       value: "Duren Sawit",
     },
     {
-      label: "Kelapa Gading",
+      title: "Kelapa Gading",
       value: "Kelapa Gading",
     },
   ];
@@ -74,29 +76,14 @@ export default function NewWarehouse() {
   async function onSubmit(data) {
     console.log(data);
     setLoading(true);
-    const baseURL = "http://localhost:3000";
-    try {
-      const response = await fetch(`${baseURL}/api/warehouse`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (response.ok) {
-        console.log(response);
-        setLoading(false);
-        reset();
-      }
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-    }
+    makeApiRequest(setLoading, "api/warehouse", data, "Warehouse", reset);
   }
   return (
     <div className="justify-between w-full p-4 ">
       {/* Header */}
       <FormHeader
         title="Warehouse"
-        href="/dashboard-inventory/inventory/unit"
+        href="/dashboard-inventory/inventory/warehouse"
       />
       {/* Form */}
       <div className="relative p-4 w-full h-full md:h-auto">
@@ -112,7 +99,7 @@ export default function NewWarehouse() {
               />
               <SelectInput
                 label="Warehouse Type"
-                name="type"
+                name="warehouseType"
                 register={register}
                 errors={errors}
                 className="w-full"
@@ -121,7 +108,7 @@ export default function NewWarehouse() {
 
               <SelectInput
                 label="Province"
-                name="location"
+                name="province"
                 register={register}
                 errors={errors}
                 className="w-full"
@@ -145,11 +132,11 @@ export default function NewWarehouse() {
               />
               <SelectInput
                 label="Subdistrict"
-                name="subdistrict"
+                name="subDistric"
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={subdistric}
+                options={subDistric}
               />
             </div>
 

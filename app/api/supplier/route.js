@@ -5,32 +5,44 @@ export async function POST(request) {
   try {
     const {
       title,
-      warehouseType,
+      phone,
+      email,
       province,
       city,
       distric,
-      subDistric,
-      detail,
+      subdistrict,
+      addressDetail,
+      contactPerson,
+      supplierCode,
+      paymentTerms,
+      taxID,
+      notes,
     } = await request.json();
-    const warehouse = await db.warehouse.create({
+    const suppliers = await db.supplier.create({
       data: {
         title,
-        warehouseType,
+        phone,
+        email,
         province,
         city,
         distric,
-        subDistric,
-        detail,
+        subdistrict,
+        addressDetail,
+        contactPerson,
+        supplierCode,
+        paymentTerms,
+        taxID,
+        notes,
       },
     });
-    console.log(warehouse);
-    return NextResponse.json(warehouse);
+    console.log(suppliers);
+    return NextResponse.json(suppliers);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
         error,
-        message: "failed to create Warehouse",
+        message: "failed to create Supplier",
       },
       {
         status: 500,
@@ -41,19 +53,19 @@ export async function POST(request) {
 
 export async function GET(request) {
   try {
-    const warehouse = await db.warehouse.findMany({
+    const suppliers = await db.supplier.findMany({
       orderBy: {
         createdAt: "desc",
       },
     });
-    console.log(warehouse);
-    return NextResponse.json(warehouse);
+    console.log(suppliers);
+    return NextResponse.json(suppliers);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
         error,
-        message: "failed to get Warehouse Data",
+        message: "failed to get Supplier Data",
       },
       {
         status: 500,

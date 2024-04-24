@@ -1,9 +1,37 @@
+import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
     const { title, abreviation } = await request.json();
-    const units = { title, abreviation };
+    const unit = await db.unit.create({
+      data: {
+        title,
+        abreviation,
+      },
+    });
+    console.log(unit);
+    return NextResponse.json(unit);
+  } catch (errors) {
+    console.log(errors);
+    return NextResponse.json(
+      {
+        errors,
+        message: "failed to create Units",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+}
+export async function GET(request) {
+  try {
+    const units = await db.unit.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
     console.log(units);
     return NextResponse.json(units);
   } catch (error) {
@@ -11,7 +39,7 @@ export async function POST(request) {
     return NextResponse.json(
       {
         error,
-        message: "failed to create Units",
+        message: "failed to get units",
       },
       {
         status: 500,

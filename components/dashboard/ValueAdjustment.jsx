@@ -5,11 +5,8 @@ import TextArea from "@/components/form-input/TextArea";
 import TextInput from "@/components/form-input/TextInput";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import CurrentDate from "./CurrentDate";
-import { makeApiRequest } from "@/lib/apiRequest";
-import toast from "react-hot-toast";
 
-export default function AddInventoryForm() {
+export default function ValueAdjustment() {
   const warehouseOptions = [
     {
       label: "Main Warehouse",
@@ -71,30 +68,36 @@ export default function AddInventoryForm() {
     console.log(data);
     setLoading(true);
     const baseURL = "http://localhost:3000";
-    makeApiRequest(setLoading, "api/adjustment/add", data, "Unit", reset);
+    try {
+      const response = await fetch(`${baseURL}/api/adjutsment/add`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        console.log(response);
+        setLoading(false);
+        reset();
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   }
 
   return (
     <div className="justify-between w-full px-4 dark:border-gray-600">
       {/* Form */}
-      <div className=" px-4 w-full h-full md:h-auto">
-        <div className=" p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
-          <div className="items-center text-slate-50 text-lg text-center flex justify-center">
+      <div className="relative px-4 w-full h-full md:h-auto">
+        <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+          <div className="items-center text-slate-50 mb-2 text-lg text-center pb-2 flex justify-center">
             <span>No :</span>
-            <h2 className="p-1 bg-blue-500 rounded-lg px-6 ml-3" name="refNum">
-              ADSTK-00020/
-              {/* {`${CurrentDate}`} */}
+            <h2 className="p-1 bg-blue-500 rounded-lg px-6 ml-3">
+              VLADJ-00020/14/XI/2024
             </h2>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-2 py-4">
             <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:gap-8">
-              <TextInput
-                lable="Date"
-                name="date"
-                register={register}
-                errors={errors}
-                className="w-full"
-              />
               <SelectInput
                 label="Category"
                 name="category"
@@ -130,7 +133,7 @@ export default function AddInventoryForm() {
 
               <SelectInput
                 label="Warehouse :"
-                name="warehouseId"
+                name="warehouse"
                 register={register}
                 errors={errors}
                 className="w-full"

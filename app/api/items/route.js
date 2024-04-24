@@ -1,34 +1,66 @@
+import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
-    // partname,
-    //   partnum,
-    //   brand,
-    //   category,
-    //   barcode,
-    //   sku,
-    //   qty,
-    //   unit,
-    //   amount,
-    //   buyprice,
-    //   sellprice,
-    //   reOrderPoint,
-    //   supplier,
-    //   tax,
-    //   warehouse,
-    //   note,
-    //   description;
-
-    const data = await request.json();
-    console.log(data);
-    return NextResponse.json(data);
+    const itemData = await request.json();
+    // console.log(itemData);
+    const itemName = await db.items.create({
+      data: {
+        partName: itemData.partName,
+        partNum: itemData.partNum,
+        brandId: itemData.brandId,
+        categoryId: itemData.categoryId,
+        barcode: itemData.barcode,
+        sku: itemData.sku,
+        quantity: parseInt(itemData.quantity),
+        uniId: itemData.unitId,
+        amount: parseInt(itemData.amount),
+        isRetail: itemData.isRetail,
+        buyPrice: parseInt(itemData.buyPrice),
+        sellPrice: parseInt(itemData.sellPrice),
+        reOrderPoint: parseInt(itemData.reOrderPoint),
+        supplierId: itemData.supplierId,
+        isTax: itemData.isTax,
+        taxRate: parseFloat(itemData.taxRate),
+        warehouseId: itemData.warehouseId,
+        itemNote: itemData.itemNote,
+        itemDesc: itemData.itemDesc,
+        imageUrl: itemData.imageUrl,
+      },
+    });
+    // console.log(itemName);
+    // const itemData = await itemName.json();
+    return NextResponse.json(itemName);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
         error,
         message: "failed to create New Item",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+}
+
+export async function GET(request) {
+  try {
+    const items = await db.items.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    console.log(items);
+    return NextResponse.json(items);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      {
+        error,
+        message: "failed to get Item Data",
       },
       {
         status: 500,

@@ -90,9 +90,10 @@ export default function TransferInventoryForm() {
       {/* Form */}
       <div className=" px-4 w-full h-full md:h-auto">
         <div className=" p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
-          <div className="text-slate-50 mb-2 text-lg text-center pb-2 flex justify-center">
-            <h2 className="p-1 bg-blue-500 rounded-lg px-6">
-              REQ-00020/14/XI/2024
+          <div className="items-center text-slate-50 text-lg text-center flex justify-center">
+            <span>No :</span>
+            <h2 className="p-1 bg-blue-500 rounded-lg px-6 ml-3">
+              TFSTK-00020/14/XI/2024
             </h2>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-2 py-4">
@@ -131,7 +132,7 @@ export default function TransferInventoryForm() {
               />
               <SelectInput
                 label="Transfer from :"
-                name="transferfrom"
+                name="senderWarehouseId"
                 register={register}
                 errors={errors}
                 className="w-full"
@@ -139,7 +140,7 @@ export default function TransferInventoryForm() {
               />
               <SelectInput
                 label="Transfer to :"
-                name="transferto"
+                name="receiverWarehouseId"
                 register={register}
                 errors={errors}
                 className="w-full"
