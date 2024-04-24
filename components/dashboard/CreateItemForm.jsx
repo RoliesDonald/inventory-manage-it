@@ -60,13 +60,13 @@ export default function CreateItemForm({
                 className="xs:col-span-2"
                 errors={errors}
               />
-              <SelectInput
+              {/* <SelectInput
                 label="Part Brand"
                 name="brandId"
                 register={register}
                 className="w-full"
                 options={brand}
-              />
+              /> */}
               <SelectInput
                 label="Category"
                 name="categoryId"

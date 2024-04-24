@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   try {
     const itemData = await request.json();
-    // console.log(itemData);
+    console.log(itemData);
     const itemName = await db.items.create({
       data: {
         partName: itemData.partName,
@@ -29,8 +29,7 @@ export async function POST(request) {
         imageUrl: itemData.imageUrl,
       },
     });
-    // console.log(itemName);
-    // const itemData = await itemName.json();
+    console.log(itemName);
     return NextResponse.json(itemName);
   } catch (error) {
     console.log(error);
