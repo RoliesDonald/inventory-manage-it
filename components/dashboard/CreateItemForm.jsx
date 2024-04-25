@@ -31,7 +31,7 @@ export default function CreateItemForm({
   async function onSubmit(data) {
     data.imageUrl = imageUrl;
     console.log(data);
-    // setLoading(true);
+    setLoading(true);
     makeApiRequest(setLoading, "api/items", data, "Item", reset);
     setImageUrl("");
   }
@@ -60,13 +60,13 @@ export default function CreateItemForm({
                 className="xs:col-span-2"
                 errors={errors}
               />
-              {/* <SelectInput
+              <SelectInput
                 label="Part Brand"
                 name="brandId"
                 register={register}
                 className="w-full"
                 options={brand}
-              /> */}
+              />
               <SelectInput
                 label="Category"
                 name="categoryId"

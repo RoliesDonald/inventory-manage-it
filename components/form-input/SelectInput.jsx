@@ -7,6 +7,10 @@ export default function SelectInput({
   className = "xs:col-span-2",
   options = [],
 }) {
+  const [value, setValue] = useState("");
+  function handleSelect(event) {
+    setValue(event.target.value);
+  }
   return (
     <div className={className}>
       <label
@@ -21,6 +25,7 @@ export default function SelectInput({
           id={name}
           name={name}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          onChange={handleSelect}
         >
           {options.map((option, i) => {
             return (
@@ -30,11 +35,8 @@ export default function SelectInput({
             );
           })}
         </select>
+        <p className="text-white">{value}</p>
       </div>
     </div>
   );
-}
-
-export function SelectInput2() {
-  return <div className="xs-col-span-2"></div>;
 }

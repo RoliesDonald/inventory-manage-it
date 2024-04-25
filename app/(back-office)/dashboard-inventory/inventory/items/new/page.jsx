@@ -4,14 +4,14 @@ import { getData } from "@/lib/getData";
 
 export default async function NewItem() {
   const categoryOptions = getData("categories");
-  // const brandOptions = getData("brand");
+  const brandOptions = getData("brand");
   const supplierOptions = getData("supplier");
   const unitOptions = getData("units");
   const warehouseOptions = getData("warehouse");
 
   const [categories, brand, supplier, units, warehouse] = await Promise.all([
     categoryOptions,
-    // brandOptions,
+    brandOptions,
     supplierOptions,
     unitOptions,
     warehouseOptions,
@@ -28,7 +28,7 @@ export default async function NewItem() {
       <CreateItemForm
         category={categories}
         unit={units}
-        // brand={brand}
+        brand={brand}
         supplier={supplier}
         warehouse={warehouse}
       />

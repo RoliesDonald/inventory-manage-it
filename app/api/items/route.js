@@ -14,7 +14,7 @@ export async function POST(request) {
         barcode: itemData.barcode,
         sku: itemData.sku,
         quantity: parseInt(itemData.quantity),
-        uniId: itemData.unitId,
+        unitId: itemData.unitId,
         amount: parseInt(itemData.amount),
         isRetail: itemData.isRetail,
         buyPrice: parseInt(itemData.buyPrice),
@@ -52,7 +52,7 @@ export async function GET(request) {
         createdAt: "desc",
       },
     });
-    console.log(items);
+    // console.log(items);
     return NextResponse.json(items);
   } catch (error) {
     console.log(error);
