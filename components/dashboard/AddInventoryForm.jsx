@@ -9,55 +9,12 @@ import CurrentDate from "./CurrentDate";
 import { makeApiRequest } from "@/lib/apiRequest";
 import toast from "react-hot-toast";
 
-export default function AddInventoryForm() {
-  const warehouseOptions = [
-    {
-      label: "Main Warehouse",
-      value: "main warehouse",
-    },
-    {
-      label: "Branch Warehouse",
-      value: "branch warehouse",
-    },
-  ];
-
-  const brandOptions = [
-    {
-      defaultValue: "select",
-      label: "Mitsubishi",
-      value: "mitsubishi",
-    },
-    {
-      label: "Isuzu",
-      value: "isuzu",
-      defaultValue: "select",
-    },
-  ];
-  const itemOptions = [
-    {
-      label: "Filter Oli",
-      value: "oilfilter",
-    },
-    {
-      label: "Plat Kopling",
-      value: "platkopling",
-    },
-  ];
-  const categotyOptions = [
-    {
-      label: "Electrical",
-      value: "electrical",
-    },
-    {
-      label: "Engine",
-      value: "engine",
-    },
-    {
-      label: "Lubrican",
-      value: "lubrican",
-    },
-  ];
-
+export default function AddInventoryForm({
+  items,
+  warehouse,
+  brands,
+  categories,
+}) {
   const {
     register,
     handleSubmit,
@@ -101,7 +58,7 @@ export default function AddInventoryForm() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={categotyOptions}
+                options={categories}
               />
               <SelectInput
                 label="Brand"
@@ -109,7 +66,7 @@ export default function AddInventoryForm() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={brandOptions}
+                options={brands}
               />
               <SelectInput
                 label="Item Name"
@@ -117,7 +74,7 @@ export default function AddInventoryForm() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={itemOptions}
+                options={items}
               />
               <TextInput
                 lable="Amount to Add"
@@ -134,7 +91,7 @@ export default function AddInventoryForm() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={warehouseOptions}
+                options={warehouse}
               />
             </div>
 

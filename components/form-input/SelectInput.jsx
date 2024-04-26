@@ -31,11 +31,11 @@ export default function SelectInput({
             return (
               <option key={i} value={option.id}>
                 {option.title}
+                {option.partName}
               </option>
             );
           })}
         </select>
-        <p className="text-white">{value}</p>
       </div>
     </div>
   );

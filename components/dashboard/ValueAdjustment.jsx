@@ -5,56 +5,14 @@ import TextArea from "@/components/form-input/TextArea";
 import TextInput from "@/components/form-input/TextInput";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import TextDisplay from "../form-input/textDisplay";
 
-export default function ValueAdjustment() {
-  const warehouseOptions = [
-    {
-      label: "Main Warehouse",
-      value: "main warehouse",
-    },
-    {
-      label: "Branch Warehouse",
-      value: "branch warehouse",
-    },
-  ];
-
-  const brandOptions = [
-    {
-      defaultValue: "select",
-      label: "Mitsubishi",
-      value: "mitsubishi",
-    },
-    {
-      label: "Isuzu",
-      value: "isuzu",
-      defaultValue: "select",
-    },
-  ];
-  const itemOptions = [
-    {
-      label: "Filter Oli",
-      value: "oilfilter",
-    },
-    {
-      label: "Plat Kopling",
-      value: "platkopling",
-    },
-  ];
-  const categotyOptions = [
-    {
-      label: "Electrical",
-      value: "electrical",
-    },
-    {
-      label: "Engine",
-      value: "engine",
-    },
-    {
-      label: "Lubrican",
-      value: "lubrican",
-    },
-  ];
-
+export default function ValueAdjustment({
+  items,
+  warehouse,
+  brands,
+  categories,
+}) {
   const {
     register,
     handleSubmit,
@@ -104,7 +62,7 @@ export default function ValueAdjustment() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={categotyOptions}
+                options={categories}
               />
               <SelectInput
                 label="Brand"
@@ -112,7 +70,7 @@ export default function ValueAdjustment() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={brandOptions}
+                options={brands}
               />
               <SelectInput
                 label="Item Name"
@@ -120,16 +78,23 @@ export default function ValueAdjustment() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={itemOptions}
+                options={items}
               />
-              <TextInput
-                lable="Amount to Add"
-                name="addStockQty"
-                register={register}
-                type="number"
-                errors={errors}
-                className="w-full"
-              />
+              <div className="grid gap-4 grid-cols-2 sm:gap-4">
+                <TextDisplay
+                  lable="Current Qty"
+                  name="currentAmount"
+                  register={register}
+                />
+                <TextInput
+                  lable="Adjustment Qty"
+                  name="addStockQty"
+                  register={register}
+                  type="number"
+                  errors={errors}
+                  className="w-full"
+                />
+              </div>
 
               <SelectInput
                 label="Warehouse :"
@@ -137,7 +102,7 @@ export default function ValueAdjustment() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={warehouseOptions}
+                options={warehouse}
               />
             </div>
 

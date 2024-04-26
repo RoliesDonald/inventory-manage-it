@@ -6,55 +6,12 @@ import TextInput from "@/components/form-input/TextInput";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export default function TransferInventoryForm() {
-  const warehouseOptions = [
-    {
-      label: "Main Warehouse",
-      value: "main warehouse",
-    },
-    {
-      label: "Branch Warehouse",
-      value: "branch warehouse",
-    },
-  ];
-
-  const brandOptions = [
-    {
-      defaultValue: "select",
-      label: "Mitsubishi",
-      value: "mitsubishi",
-    },
-    {
-      label: "Isuzu",
-      value: "isuzu",
-      defaultValue: "select",
-    },
-  ];
-  const itemOptions = [
-    {
-      label: "Filter Oli",
-      value: "oilfilter",
-    },
-    {
-      label: "Plat Kopling",
-      value: "platkopling",
-    },
-  ];
-  const categotyOptions = [
-    {
-      label: "Electrical",
-      value: "electrical",
-    },
-    {
-      label: "Engine",
-      value: "engine",
-    },
-    {
-      label: "Lubrican",
-      value: "lubrican",
-    },
-  ];
-
+export default function TransferInventoryForm({
+  items,
+  warehouse,
+  brands,
+  categories,
+}) {
   const {
     register,
     handleSubmit,
@@ -104,7 +61,7 @@ export default function TransferInventoryForm() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={categotyOptions}
+                options={categories}
               />
               <SelectInput
                 label="Brand"
@@ -112,7 +69,7 @@ export default function TransferInventoryForm() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={brandOptions}
+                options={brands}
               />
               <SelectInput
                 label="Item Name"
@@ -120,7 +77,7 @@ export default function TransferInventoryForm() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={itemOptions}
+                options={items}
               />
               <TextInput
                 lable="Amount to Transfer"
@@ -136,7 +93,7 @@ export default function TransferInventoryForm() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={warehouseOptions}
+                options={warehouse}
               />
               <SelectInput
                 label="Transfer to :"
@@ -144,7 +101,7 @@ export default function TransferInventoryForm() {
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={warehouseOptions}
+                options={warehouse}
               />
             </div>
 
