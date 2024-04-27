@@ -44,7 +44,7 @@ export default function CreateItemForm({
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-4 ">
               <TextInput
                 lable="Part Name"
-                name="partName"
+                name="title"
                 register={register}
                 isRequired="true"
                 type="text"

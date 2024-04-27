@@ -6,12 +6,7 @@ import ValueAdjustment from "@/components/dashboard/ValueAdjustment";
 
 import React, { useState } from "react";
 
-export default function AdjustmentForm({
-  items,
-  warehouse,
-  brands,
-  categories,
-}) {
+export default function AdjustmentForm({ items, warehouse, brands, category }) {
   const tabs = [
     {
       title: "Add New",
@@ -64,21 +59,21 @@ export default function AdjustmentForm({
           items={items}
           warehouse={warehouse}
           brands={brands}
-          categories={categories}
+          category={category}
         />
       ) : acticePage === "transfer" ? (
         <TransferInventoryForm
           items={items}
           warehouse={warehouse}
           brands={brands}
-          categories={categories}
+          category={category}
         />
       ) : acticePage === "valueAdj" ? (
         <ValueAdjustment
           items={items}
           warehouse={warehouse}
           brands={brands}
-          categories={categories}
+          category={category}
         />
       ) : (
         <AddInventoryForm />

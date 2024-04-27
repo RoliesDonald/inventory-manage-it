@@ -13,7 +13,7 @@ export default function AddInventoryForm({
   items,
   warehouse,
   brands,
-  categories,
+  category,
 }) {
   const {
     register,
@@ -27,8 +27,7 @@ export default function AddInventoryForm({
   async function onSubmit(data) {
     console.log(data);
     setLoading(true);
-    const baseURL = "http://localhost:3000";
-    makeApiRequest(setLoading, "api/adjustment/add", data, "Unit", reset);
+    makeApiRequest(setLoading, "api/adjustment/add", data, "Add", reset);
   }
 
   return (
@@ -40,29 +39,28 @@ export default function AddInventoryForm({
             <span>No :</span>
             <h2 className="p-1 bg-blue-500 rounded-lg px-6 ml-3" name="refNum">
               ADSTK-00020/
-              {/* {`${CurrentDate}`} */}
             </h2>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-2 py-4">
             <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:gap-8">
               <TextInput
                 lable="Date"
-                name="date"
+                name="refNum"
                 register={register}
                 errors={errors}
                 className="w-full"
               />
               <SelectInput
                 label="Category"
-                name="category"
+                name="categoryId"
                 register={register}
                 errors={errors}
                 className="w-full"
-                options={categories}
+                options={category}
               />
               <SelectInput
                 label="Brand"
-                name="brand"
+                name="brandId"
                 register={register}
                 errors={errors}
                 className="w-full"
@@ -70,7 +68,7 @@ export default function AddInventoryForm({
               />
               <SelectInput
                 label="Item Name"
-                name="itemName"
+                name="itemId"
                 register={register}
                 errors={errors}
                 className="w-full"
@@ -90,7 +88,7 @@ export default function AddInventoryForm({
                 name="warehouseId"
                 register={register}
                 errors={errors}
-                className="w-full"
+                className="w-full "
                 options={warehouse}
               />
             </div>

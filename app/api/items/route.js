@@ -7,7 +7,7 @@ export async function POST(request) {
     console.log(itemData);
     const itemName = await db.items.create({
       data: {
-        partName: itemData.partName,
+        title: itemData.title,
         partNum: itemData.partNum,
         brandId: itemData.brandId,
         categoryId: itemData.categoryId,

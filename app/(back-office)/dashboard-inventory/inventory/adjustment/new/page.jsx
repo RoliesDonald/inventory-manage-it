@@ -7,7 +7,7 @@ export default async function NewAdjustment() {
   const brandOptions = getData("brand");
   const categoriesOptions = getData("categories");
 
-  const [items, warehouse, brands, categories] = await Promise.all([
+  const [items, warehouse, brands, category] = await Promise.all([
     itemsOptions,
     warehouseOptions,
     brandOptions,
@@ -18,7 +18,7 @@ export default async function NewAdjustment() {
       items={items}
       warehouse={warehouse}
       brands={brands}
-      categories={categories}
+      category={category}
     />
   );
 }

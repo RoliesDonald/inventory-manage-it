@@ -15,12 +15,14 @@ datasource db {
 }
 
 model Category {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String?
-  Items       Items[]
-  createdAt   DateTime @default(now())
-  updateAt    DateTime @updatedAt
+  id                     String                   @id @default(auto()) @map("_id") @db.ObjectId
+  title                  String
+  description            String?
+  Items                  Items[]
+  createdAt              DateTime                 @default(now())
+  updateAt               DateTime                 @updatedAt
+  AddStockAdjusment      AddStockAdjusment[]
+  TransferStockAdjusment TransferStockAdjusment[]
 }
 
 model Unit {
@@ -33,17 +35,19 @@ model Unit {
 }
 
 model Brand {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String?
-  createdAt   DateTime @default(now())
-  updateAt    DateTime @updatedAt
-  Items       Items[]
+  id                     String                   @id @default(auto()) @map("_id") @db.ObjectId
+  title                  String
+  description            String?
+  createdAt              DateTime                 @default(now())
+  updateAt               DateTime                 @updatedAt
+  Items                  Items[]
+  AddStockAdjusment      AddStockAdjusment[]
+  TransferStockAdjusment TransferStockAdjusment[]
 }
 
 model Items {
   id                     String                   @id @default(auto()) @map("_id") @db.ObjectId
-  partName               String
+  title                  String
   partNum                String                   @unique
   brand                  Brand                    @relation(fields: [brandId], references: [id], onDelete: Cascade)
   brandId                String                   @db.ObjectId
@@ -92,12 +96,14 @@ model Warehouse {
 
 model AddStockAdjusment {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  refNum      String
-  category    String
-  brand       String
-  item        Items     @relation(fields: [itemName], references: [id])
-  itemName    String    @db.ObjectId
-  addStockQty Int
+  refNum      String    @default("reff")
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  String    @db.ObjectId
+  brand       Brand     @relation(fields: [brandId], references: [id])
+  brandId     String    @db.ObjectId
+  item        Items     @relation(fields: [itemId], references: [id])
+  itemId      String    @db.ObjectId
+  addStockQty Int       @default(0)
   warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
   warehouseId String    @db.ObjectId
   notes       String?
@@ -107,17 +113,19 @@ model AddStockAdjusment {
 
 model TransferStockAdjusment {
   id                  String    @id @default(auto()) @map("_id") @db.ObjectId
-  refNum              String
-  category            String
-  brand               String
-  item                Items     @relation(fields: [itemName], references: [id])
-  itemName            String    @db.ObjectId
-  transferStockQty    Int
+  refNum              String    @default("reff")
+  category            Category  @relation(fields: [categoryId], references: [id])
+  categoryId          String    @db.ObjectId
+  brand               Brand     @relation(fields: [brandId], references: [id])
+  brandId             String    @db.ObjectId
+  item                Items     @relation(fields: [itemId], references: [id])
+  itemId              String    @db.ObjectId
+  addStockQty         Int       @default(0)
   warehouse           Warehouse @relation(fields: [warehouseId], references: [id])
   warehouseId         String    @db.ObjectId
-  senderWarehouseId   String
-  receiverWarehouseId String
   notes               String?
+  receiverWarehouseId String
+  senderWarehouseId   String
   createdAt           DateTime  @default(now())
   updateAt            DateTime  @updatedAt
 }

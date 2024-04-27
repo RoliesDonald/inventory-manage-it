@@ -1,17 +1,19 @@
+import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
-    const { category, itemName, brand, addStockQty, refNum, notes } =
-      await request.json();
-    const addStockAdjusment = await db.addStockAdjusment.create({
+    const itemData = await request.json();
+    console.log(itemData);
+    const addStockAdjusment = await db.AddStockAdjusment.create({
       data: {
-        category,
-        itemName,
-        brand,
-        addStockQty,
-        refNum,
-        notes,
+        itemId: itemData.itemId,
+        categoryId: itemData.categoryId,
+        warehouseId: itemData.warehouseId,
+        brandId: itemData.brandId,
+        addStockQty: parseInt(itemData.addStockQty),
+        refNum: itemData.refNum,
+        notes: itemData.notes,
       },
     });
 
@@ -22,7 +24,7 @@ export async function POST(request) {
     return NextResponse.json(
       {
         error,
-        message: "failed to create Units",
+        message: "failed to create Add Item",
       },
       {
         status: 500,
@@ -45,7 +47,7 @@ export async function GET(request) {
     return NextResponse.json(
       {
         error,
-        message: "failed to get Stock Data",
+        message: "failed to get Add Item Data",
       },
       {
         status: 500,
