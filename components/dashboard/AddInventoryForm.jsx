@@ -31,10 +31,10 @@ export default function AddInventoryForm({
   }
 
   return (
-    <div className="justify-between w-full px-4 dark:border-gray-600">
+    <div className="justify-between w-full dark:border-gray-600">
       {/* Form */}
-      <div className=" px-4 w-full h-full md:h-auto">
-        <div className=" p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+      <div className="w-full h-full md:h-auto">
+        <div className=" bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
           <div className="items-center text-slate-50 text-lg text-center flex justify-center">
             <span>No :</span>
             <h2 className="p-1 bg-blue-500 rounded-lg px-6 ml-3" name="refNum">

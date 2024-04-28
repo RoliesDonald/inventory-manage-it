@@ -43,7 +43,7 @@ export default function SideBar() {
       href: "/dashboard-inventory/inventory/warehouse",
     },
     {
-      title: "Inventory Adjusment",
+      title: "Stock Adj",
       newhref: "/dashboard-inventory/inventory/adjustment/new",
       href: "/dashboard-inventory/inventory/adjustment",
     },

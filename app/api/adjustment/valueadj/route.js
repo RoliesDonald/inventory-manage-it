@@ -35,3 +35,26 @@ export async function POST(request) {
     );
   }
 }
+
+export async function GET(request) {
+  try {
+    const addStock = await db.addStockAdjusment.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    // console.log(items);
+    return NextResponse.json(addStock);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      {
+        error,
+        message: "failed to get Add Item Data",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+}

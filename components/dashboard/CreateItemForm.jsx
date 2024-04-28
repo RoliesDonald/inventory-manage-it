@@ -36,9 +36,9 @@ export default function CreateItemForm({
     setImageUrl("");
   }
   return (
-    <div className="justify-between w-full p-4 border-b border-gray-200 dark:border-gray-600">
+    <div className="justify-between w-full border-b border-gray-200 dark:border-gray-600">
       {/* Form */}
-      <div className=" p-4 w-full h-full md:h-auto space--5">
+      <div className=" py-4 w-full h-full md:h-auto">
         <div className=" p-4 bg-white rounded-lg shadow  dark:bg-gray-800 sm:p-5">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-4 ">

@@ -76,10 +76,10 @@ export default function NewSupplier() {
         href="/dashboard-inventory/inventory/supplier"
       />
       {/* Form */}
-      <div className=" p-4 w-full h-full md:h-auto">
-        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+      <div className="py-2 w-full h-full md:h-auto">
+        <div className="bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid gap-4 sm:grid-cols-1 mb-4 lg:grid-cols-2 sm:gap-4">
+            <div className="grid gap-4 sm:grid-cols-1 mb-4 lg:grid-cols-3 sm:gap-4">
               <TextInput
                 lable="Supplier Name"
                 name="title"

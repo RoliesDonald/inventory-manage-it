@@ -7,6 +7,7 @@ export default withUt({
     "./components/**/*.{js,jsx}",
     "./app/**/*.{js,jsx}",
     "./src/**/*.{js,jsx}",
+    "./node_modules/flowbite/**/*.js",
   ],
   prefix: "",
   theme: {
@@ -74,5 +75,9 @@ export default withUt({
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/forms")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/forms"),
+    require("flowbite/plugin"),
+  ],
 });

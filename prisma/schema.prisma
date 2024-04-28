@@ -15,14 +15,13 @@ datasource db {
 }
 
 model Category {
-  id                     String                   @id @default(auto()) @map("_id") @db.ObjectId
-  title                  String
-  description            String?
-  Items                  Items[]
-  createdAt              DateTime                 @default(now())
-  updateAt               DateTime                 @updatedAt
-  AddStockAdjusment      AddStockAdjusment[]
-  TransferStockAdjusment TransferStockAdjusment[]
+  id                String              @id @default(auto()) @map("_id") @db.ObjectId
+  title             String
+  description       String?
+  Items             Items[]
+  createdAt         DateTime            @default(now())
+  updateAt          DateTime            @updatedAt
+  AddStockAdjusment AddStockAdjusment[]
 }
 
 model Unit {
@@ -35,26 +34,25 @@ model Unit {
 }
 
 model Brand {
-  id                     String                   @id @default(auto()) @map("_id") @db.ObjectId
-  title                  String
-  description            String?
-  createdAt              DateTime                 @default(now())
-  updateAt               DateTime                 @updatedAt
-  Items                  Items[]
-  AddStockAdjusment      AddStockAdjusment[]
-  TransferStockAdjusment TransferStockAdjusment[]
+  id                String              @id @default(auto()) @map("_id") @db.ObjectId
+  title             String
+  description       String?
+  createdAt         DateTime            @default(now())
+  updateAt          DateTime            @updatedAt
+  Items             Items[]
+  AddStockAdjusment AddStockAdjusment[]
 }
 
 model Items {
   id                     String                   @id @default(auto()) @map("_id") @db.ObjectId
   title                  String
-  partNum                String                   @unique
+  partNum                String
   brand                  Brand                    @relation(fields: [brandId], references: [id], onDelete: Cascade)
   brandId                String                   @db.ObjectId
   category               Category                 @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId             String                   @db.ObjectId
   barcode                String
-  sku                    String                   @unique
+  sku                    String
   quantity               Int
   unit                   Unit                     @relation(fields: [unitId], references: [id], onDelete: Cascade)
   unitId                 String                   @db.ObjectId
@@ -72,31 +70,30 @@ model Items {
   itemNote               String
   itemDesc               String
   imageUrl               String?
-  TransferStockAdjusment TransferStockAdjusment[]
   AddStockAdjusment      AddStockAdjusment[]
   createdAt              DateTime                 @default(now())
   updateAt               DateTime                 @updatedAt
+  TransferStockAdjusment TransferStockAdjusment[]
 }
 
 model Warehouse {
-  id                     String                   @id @default(auto()) @map("_id") @db.ObjectId
-  title                  String                   @unique
-  warehouseType          String
-  province               String
-  city                   String
-  distric                String
-  subDistric             String
-  detail                 String?
-  addStockAdjustment     AddStockAdjusment[]
-  TransferStockAdjusment TransferStockAdjusment[]
-  Items                  Items[]
-  createdAt              DateTime                 @default(now())
-  updateAt               DateTime                 @updatedAt
+  id                 String              @id @default(auto()) @map("_id") @db.ObjectId
+  title              String
+  warehouseType      String
+  province           String
+  city               String
+  distric            String
+  subDistric         String
+  detail             String?
+  addStockAdjustment AddStockAdjusment[]
+  Items              Items[]
+  createdAt          DateTime            @default(now())
+  updateAt           DateTime            @updatedAt
 }
 
 model AddStockAdjusment {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  refNum      String    @default("reff")
+  refNum      String
   category    Category  @relation(fields: [categoryId], references: [id])
   categoryId  String    @db.ObjectId
   brand       Brand     @relation(fields: [brandId], references: [id])
@@ -112,22 +109,16 @@ model AddStockAdjusment {
 }
 
 model TransferStockAdjusment {
-  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
-  refNum              String    @default("reff")
-  category            Category  @relation(fields: [categoryId], references: [id])
-  categoryId          String    @db.ObjectId
-  brand               Brand     @relation(fields: [brandId], references: [id])
-  brandId             String    @db.ObjectId
-  item                Items     @relation(fields: [itemId], references: [id])
-  itemId              String    @db.ObjectId
-  addStockQty         Int       @default(0)
-  warehouse           Warehouse @relation(fields: [warehouseId], references: [id])
-  warehouseId         String    @db.ObjectId
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  refNum              String
+  item                Items    @relation(fields: [itemId], references: [id])
+  itemId              String   @db.ObjectId
+  transferStockQty    Int      @default(0)
   notes               String?
   receiverWarehouseId String
   senderWarehouseId   String
-  createdAt           DateTime  @default(now())
-  updateAt            DateTime  @updatedAt
+  createdAt           DateTime @default(now())
+  updateAt            DateTime @updatedAt
 }
 
 model Supplier {
@@ -141,7 +132,7 @@ model Supplier {
   subdistrict   String
   addressDetail String?
   contactPerson String?
-  supplierCode  String   @unique
+  supplierCode  String
   paymentTerms  String?
   taxID         String?
   notes         String?

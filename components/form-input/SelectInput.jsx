@@ -7,7 +7,7 @@ export default function SelectInput({
   className = "xs:col-span-2",
   options = [],
 }) {
-  const [value, setValue] = useState("");
+  const [values, setValue] = useState("");
   function handleSelect(event) {
     setValue(event.target.value);
   }
@@ -35,7 +35,7 @@ export default function SelectInput({
             );
           })}
         </select>
-        <p className="text-yellow-300">{value}</p>
+        <p className="text-yellow-300">{values}</p>
       </div>
     </div>
   );

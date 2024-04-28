@@ -86,7 +86,7 @@ export default function NewWarehouse() {
         href="/dashboard-inventory/inventory/warehouse"
       />
       {/* Form */}
-      <div className="relative p-4 w-full h-full md:h-auto">
+      <div className="relative py-2 w-full h-full md:h-auto">
         <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:gap-4">

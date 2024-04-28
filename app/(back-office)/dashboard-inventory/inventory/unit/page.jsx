@@ -1,10 +1,19 @@
+import DataTable from "@/components/dashboard/DataTable";
 import HeaderList from "@/components/dashboard/HeaderList";
+import { getData } from "@/lib/getData";
 import React from "react";
 
-export default function Units() {
+export default async function Units() {
+  const unit = await getData("units");
+
+  const columns = ["title", "abreviation"];
   return (
     <div className="justify-between w-full p-4">
-      <HeaderList title="Unit List" />
+      <HeaderList
+        title="Units"
+        href="/dashboard-inventory/inventory/unit/new"
+      />
+      <DataTable data={unit} columns={columns} />
     </div>
   );
 }

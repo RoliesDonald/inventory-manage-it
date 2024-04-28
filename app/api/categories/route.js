@@ -10,7 +10,7 @@ export async function POST(request) {
         description,
       },
     });
-    console.log(category);
+    // console.log(category);
     return NextResponse.json(category);
   } catch (error) {
     console.log(error);
@@ -33,7 +33,7 @@ export async function GET(request) {
         createdAt: "desc",
       },
     });
-    console.log(categories);
+    // console.log(categories);
     return NextResponse.json(categories);
   } catch (error) {
     console.log(error);

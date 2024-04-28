@@ -1,12 +1,15 @@
-"use client";
+// "use client";
 import FIxHeader from "@/components/dashboard/FIxHeader";
 import React from "react";
 import piston from "@/public/images/piston.png";
 
 import OptionCard from "@/components/others/OptionCard";
+import DataTable from "@/components/dashboard/DataTable";
+import { getData } from "@/lib/getData";
 
-export default function Items() {
-  // const { title, descriptions, img, link, linkTitle, enabled } = optionData;
+export default async function Items() {
+  const items = await getData("items");
+  const columns = ["title", "partNum", "brandId"];
   const optionCards = [
     {
       title: "Items",
@@ -44,6 +47,9 @@ export default function Items() {
   return (
     <div>
       <FIxHeader newLink="/dashboard-inventory/inventory/items/new" />
+      <div className="justify-between w-full p-4">
+        <DataTable data={items} columns={columns} />
+      </div>
       <div className="grid grid-cols-3 lg:grid-cols-3 gap-5 auto-rows-max mx-2 my-2">
         {optionCards.map((card, i) => {
           return <OptionCard key={i} optionData={card} />;

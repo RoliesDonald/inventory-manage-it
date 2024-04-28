@@ -20,7 +20,7 @@ import {
 
 export default function Header() {
   return (
-    <div className="sticky top-0 bg-slate-200 h-14 flex items-center justify-between px-8 border-b-2 border-slate-300 shadow-md">
+    <div className="sticky z-50 top-0 bg-slate-200 h-14 flex items-center justify-between px-8 border-b-2 border-slate-300 shadow-md">
       <div className="flex gap-3">
         {
           <button>
