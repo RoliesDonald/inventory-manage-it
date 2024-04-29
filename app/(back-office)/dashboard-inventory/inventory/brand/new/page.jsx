@@ -3,32 +3,50 @@ import FormHeader from "@/components/dashboard/FormHeader";
 import SubmitBtn from "@/components/form-input/SubmitBtn";
 import TextArea from "@/components/form-input/TextArea";
 import TextInput from "@/components/form-input/TextInput";
-import { makeApiRequest } from "@/lib/apiRequest";
+import { makeApiRequest, makePutRequest } from "@/lib/apiRequest";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-export default function NewBrand() {
+export default function NewBrand({ selectedData = {}, isUpdate = false }) {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     watch,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: selectedData });
   const [loading, setLoading] = useState(false);
+
+  function redirect() {
+    router.replace("/dashboard-inventory/inventory/brand");
+  }
 
   async function onSubmit(data) {
     console.log(data);
     setLoading(true);
-    const baseURL = "http://localhost:3000";
-    makeApiRequest(setLoading, "api/brand", data, "brand", reset);
+    if (isUpdate) {
+      // update data
+      makePutRequest(
+        setLoading,
+        `api/brand/${selectedData.id}`,
+        data,
+        "Brand",
+        redirect,
+        reset
+      );
+    } else {
+      // this is post data
+      makeApiRequest(setLoading, "api/brand", data, "brand", reset);
+    }
   }
   return (
     <div className="justify-between w-full p-4 border-b border-gray-200 dark:border-gray-600">
       {/* Header */}
       <FormHeader
-        title="New Brand"
+        title={isUpdate ? "Update Brand" : "New Brand"}
         href="/dashboard-inventory/inventory/brand"
       />
       {/* Form */}
@@ -51,7 +69,10 @@ export default function NewBrand() {
               errors={errors}
               className="mt-4"
             />
-            <SubmitBtn isLoading={loading} title=" New Brand" />
+            <SubmitBtn
+              isLoading={loading}
+              title={isUpdate ? "Updated Brand" : "New Brand"}
+            />
           </form>
         </div>
       </div>

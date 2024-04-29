@@ -9,13 +9,15 @@ import {
   ShoppingBasket,
   ShoppingCart,
   File,
+  X,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import SubsribtionCard from "../dashboard/SubsribtionCard";
 import SideBarDropDown from "./SideBarDropDown";
 
-export default function SideBar() {
+export default function SideBar({ showSideBar, setShowSideBar }) {
+  console.log(showSideBar);
   const inventoryLink = [
     {
       title: "Category",
@@ -148,26 +150,40 @@ export default function SideBar() {
     },
   ];
   return (
-    <div className="w-60 min-h-screen bg-slate-800 text-slate-200 fixed hidden sm:block">
+    <div
+      className={`${
+        showSideBar
+          ? "w-60 min-h-screen bg-slate-800 text-slate-200 fixed lg:block z-50"
+          : "w-60 min-h-screen bg-slate-800 text-slate-200 fixed hidden lg:block z-50"
+      }`}
+    >
       {/* top sidebar or logo */}
       <div className="flex flex-col ">
         {/* logo */}
-        <Link href="/">
-          <div className="flex items-center justify-center space-x-3 bg-slate-900 py-2.5 px-3 border-b-2 border-slate-500 shadow-md">
-            <Image
-              src="/images/logo/logo-sm-light.png"
-              width="0"
-              height="0"
-              sizes="100vw"
-              style={{ width: "15%", height: "auto" }}
-              property="true"
-              alt="logo"
-            />
-            <span className="font-semibold text-red-500 text-[18px]">
-              Kampak Jaya
-            </span>
-          </div>
-        </Link>
+        <div className="flex items-center justify-center space-x-3 bg-slate-900 py-2.5 px-3 border-b-2 border-slate-500 shadow-md">
+          <Link href="/">
+            <div className="flex items-center justify-center space-x-3 bg-slate-900 py-2.5 px-3 ">
+              <Image
+                src="/images/logo/logo-sm-light.png"
+                width="0"
+                height="0"
+                sizes="100vw"
+                style={{ width: "15%", height: "auto" }}
+                property="true"
+                alt="logo"
+              />
+              <span className="font-semibold text-red-500 text-[18px]">
+                Kampak Jaya
+              </span>
+            </div>
+          </Link>
+          <button
+            className="h-5 w-5 text-slate-100 lg:hidden"
+            onClick={() => setShowSideBar(false)}
+          >
+            <X />
+          </button>
+        </div>
       </div>
       {/* Link navigation */}
 
@@ -183,7 +199,7 @@ export default function SideBar() {
           title="Inventory"
           items={inventoryLink}
           icon={BaggageClaim}
-          href="/dashboard-inventory/inventory"
+          setShowSideBar={setShowSideBar}
         />
         <SideBarDropDown title="Sales" items={salesLink} icon={ShoppingCart} />
         <SideBarDropDown

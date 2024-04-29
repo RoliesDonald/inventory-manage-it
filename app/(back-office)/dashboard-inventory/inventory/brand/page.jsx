@@ -13,7 +13,7 @@ export default async function Brand() {
         title="Brand"
         href="/dashboard-inventory/inventory/brand/new"
       />
-      <DataTable data={brand} columns={columns} />
+      <DataTable data={brand} columns={columns} sourceItem="brand" />
     </div>
   );
 }

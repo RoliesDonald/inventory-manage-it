@@ -1,7 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import "../styles/main.scss";
 import { inter, roboto } from "./(back-office)/utils/Fonts";
-// import("@themesberg/flowbite");
+import("flowbite");
 
 export const metadata = {
   title: `${process.env.APP_NAME}`,

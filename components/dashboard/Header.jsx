@@ -1,25 +1,34 @@
+// "use client";
 import { Bell, Bolt, History, Users } from "lucide-react";
 import { MdMenuOpen } from "react-icons/md";
 import React from "react";
 import SearchField from "./SearchField";
+import { Dropdown } from "flowbite-react";
+import Image from "next/image";
 
-export default function Header() {
+export default function Header({ setShowSidebar }) {
+  function handleShowSideBar() {
+    console.log("btn clicked");
+    setShowSidebar(true);
+  }
   return (
-    <div className="sticky z-50 top-0 bg-slate-200 h-14 flex items-center justify-between px-8 border-b-2 border-slate-300 shadow-md">
-      <button className=" items-center lg:hidden">
+    <div className="sticky z-40 top-0 bg-slate-200 h-14 flex items-center justify-between px-8 border-b-2 border-slate-300 shadow-md">
+      <button
+        className=" items-center lg:hidden"
+        onClick={() => setShowSidebar(true)}
+      >
         <MdMenuOpen className="w-7 h-7 text-slate-500" />
       </button>
       <div className="flex gap-3 items-center">
         <button className="items-center hidden lg:block">
           <History className="w-5 h-6 text-slate-500" />
         </button>
-
         {<SearchField />}
       </div>
 
       <div className="flex gap-3">
         <div className="hidden  items-center gap-3 lg:flex">
-          <div className="flex pr-3 border-r-2 border-gray-300 space-x-2">
+          <div className="flex border-gray-300 space-x-2">
             <button className="p-[5px] hover:bg-slate-300 hover:rounded-lg">
               <Users size={18} className="text-slate-800" />
             </button>
@@ -31,7 +40,16 @@ export default function Header() {
             </button>
           </div>
         </div>
-        <img
+        <button className="lg:hidden">
+          <Image
+            src="/images/profile-default.png"
+            alt="user Image"
+            width={96}
+            height={96}
+            className="w-8 h-8 rounded-full border border-slate-800"
+          />
+        </button>
+        {/* <img
           id="avatarButton"
           type="button"
           data-dropdown-toggle="userDropdown"
@@ -86,7 +104,7 @@ export default function Header() {
               Sign out
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ export async function POST(request) {
         description,
       },
     });
-    console.log(brand);
+
     return NextResponse.json(brand);
   } catch (error) {
     console.log(error);
@@ -33,7 +33,7 @@ export async function GET(request) {
         createdAt: "desc",
       },
     });
-    console.log(brands);
+
     return NextResponse.json(brands);
   } catch (error) {
     console.log(error);
