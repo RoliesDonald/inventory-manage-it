@@ -10,13 +10,13 @@ export default function FormHeader({ title, href }) {
     >
       <div className="flex w-full justify-between items-center">
         <h2 className="text-md font-medium text-slate-500">{title}</h2>
-        <Link
+        <a
           href={href}
           className="flex items-center space-x-2 text-slate-100 rounded-xl px-3 py-1 bg-blue-500"
         >
           <MdOutlineArrowBackIosNew />
           <span>Back to {title} List</span>
-        </Link>
+        </a>
       </div>
     </div>
   );

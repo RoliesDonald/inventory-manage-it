@@ -3,7 +3,10 @@ import { withUt } from "uploadthing/tw";
 
 export default withUt({
   content: [
+    "./node_modules/@themesberg/flowbite/**/*.js",
+    "./node_modules/@themesberg/flowbite/*/.js",
     "./pages/**/*.{js,jsx}",
+    "./public/**/*.html",
     "./components/**/*.{js,jsx}",
     "./app/**/*.{js,jsx}",
     "./src/**/*.{js,jsx}",

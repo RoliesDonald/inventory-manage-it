@@ -6,7 +6,7 @@ import React from "react";
 export default async function Category() {
   const categories = await getData("categories");
 
-  const columns = ["title", "description", ""];
+  const columns = ["title", "description"];
   return (
     <div className="justify-between w-full p-4">
       <HeaderList

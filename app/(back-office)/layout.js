@@ -8,7 +8,7 @@ export default function Layout({ children }) {
       <div>
         <SideBar />
       </div>
-      <main className="w-full ml-60 bg-neutral-200 min-h-screen">
+      <main className="w-full sm:ml-60 ml-0 bg-neutral-200 min-h-screen ">
         <Header />
         {children}
       </main>

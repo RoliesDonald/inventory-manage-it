@@ -22,6 +22,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "flowbite": "^2.3.0",
+    "flowbite-react": "^0.9.0",
     "framer-motion": "^11.0.14",
     "lucide-react": "^0.358.0",
     "mongodb": "^6.5.0",

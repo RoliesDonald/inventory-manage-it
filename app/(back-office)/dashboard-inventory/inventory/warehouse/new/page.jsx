@@ -30,6 +30,10 @@ export default function NewWarehouse() {
       title: "Jawa Tengah",
       value: "Jawa Tengah",
     },
+    {
+      title: "Jawa Barat",
+      value: "Jawa Barat",
+    },
   ];
 
   const city = [
@@ -40,6 +44,10 @@ export default function NewWarehouse() {
     {
       title: "Semarang",
       value: "Semarang",
+    },
+    {
+      title: "Bandung",
+      value: "Bandung",
     },
   ];
 
@@ -52,6 +60,10 @@ export default function NewWarehouse() {
       title: "Kp. Melayu",
       value: "Kp. Melayu",
     },
+    {
+      title: "Cicaheum",
+      value: "Cicaheum",
+    },
   ];
   const subDistric = [
     {
@@ -61,6 +73,10 @@ export default function NewWarehouse() {
     {
       title: "Kelapa Gading",
       value: "Kelapa Gading",
+    },
+    {
+      title: "Tegalega",
+      value: "Tegalega",
     },
   ];
 
@@ -79,10 +95,10 @@ export default function NewWarehouse() {
     makeApiRequest(setLoading, "api/warehouse", data, "Warehouse", reset);
   }
   return (
-    <div className="justify-between w-full p-4 ">
+    <div className="justify-between w-full p-4 border-b border-gray-200 dark:border-gray-600">
       {/* Header */}
       <FormHeader
-        title="Warehouse"
+        title="New Warehouse"
         href="/dashboard-inventory/inventory/warehouse"
       />
       {/* Form */}
@@ -151,8 +167,6 @@ export default function NewWarehouse() {
           </form>
         </div>
       </div>
-
-      {/* Bottom */}
     </div>
   );
 }

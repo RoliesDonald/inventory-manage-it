@@ -51,6 +51,11 @@ export async function GET(request) {
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        supplier: true,
+        warehouse: true,
+        brand: true,
+      },
     });
     // console.log(items);
     return NextResponse.json(items);

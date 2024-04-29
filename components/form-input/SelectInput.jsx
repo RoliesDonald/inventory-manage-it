@@ -35,7 +35,6 @@ export default function SelectInput({
             );
           })}
         </select>
-        <p className="text-yellow-300">{values}</p>
       </div>
     </div>
   );
