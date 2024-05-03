@@ -2,6 +2,7 @@ import React from "react";
 import { MdOutlineEdit } from "react-icons/md";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Link from "next/link";
+import DeleteBtn from "./DeleteBtn";
 export default function DataTable({ data = [], columns = [], sourceItem }) {
   return (
     <div className="overflow-x-auto shadow-md rounded-lg">
@@ -27,13 +28,24 @@ export default function DataTable({ data = [], columns = [], sourceItem }) {
                 key={i}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 "
               >
-                {columns.map((columnName, i) => {
-                  return (
-                    <td key={i} className="px-6 py-4 ">
-                      {item[columnName]}
-                    </td>
-                  );
-                })}
+                {columns.map((columnName, i) => (
+                  <td key={i} className="px-6 py-4">
+                    {columnName.includes(".") ? (
+                      columnName.split(".").reduce((obj, key) => obj[key], item)
+                    ) : columnName === "createdAt" ||
+                      columnName === "updatedAt" ? (
+                      new Date(item[columnName]).toLocaleDateString()
+                    ) : columnName === "imageUrl" ? (
+                      <img
+                        src={item[columnName]}
+                        alt={`Image for ${sourceItem}`}
+                        className="w-10 h-10 rounded-lg object-cover"
+                      />
+                    ) : (
+                      item[columnName]
+                    )}
+                  </td>
+                ))}
 
                 <td className="px-2 py-4 flex items-center ">
                   <Link
@@ -42,9 +54,7 @@ export default function DataTable({ data = [], columns = [], sourceItem }) {
                   >
                     <MdOutlineEdit className="w-5 h-5" />
                   </Link>
-                  <button className="font-medium text-red-600 dark:text-slate-800 hover:underline flex items-center mx-1 dark:bg-slate-300 px-2 rounded">
-                    <FaRegTrashCan className="w-5 h-5" />
-                  </button>
+                  <DeleteBtn id={item.id} endpoint={sourceItem} />
                 </td>
               </tr>
             );

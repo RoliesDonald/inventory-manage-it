@@ -173,7 +173,7 @@ export default function SideBar({ showSideBar, setShowSideBar }) {
                 alt="logo"
               />
               <span className="font-semibold text-red-500 text-[18px]">
-                Kampak Jaya
+                Bung Mekanik
               </span>
             </div>
           </Link>

@@ -6,7 +6,7 @@ import React from "react";
 export default async function Brand() {
   const brand = await getData("brand");
 
-  const columns = ["title", "description"];
+  const columns = ["title", "description", "createdAt"];
   return (
     <div className="justify-between w-full p-4">
       <HeaderList

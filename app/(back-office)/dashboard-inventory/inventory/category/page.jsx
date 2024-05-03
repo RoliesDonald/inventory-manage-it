@@ -10,11 +10,11 @@ export default async function Category() {
   return (
     <div className="justify-between w-full p-4">
       <HeaderList
-        title=" Category"
+        title="Category"
         href="/dashboard-inventory/inventory/category/new"
       />
 
-      <DataTable data={categories} columns={columns} />
+      <DataTable data={categories} columns={columns} sourceItem="category" />
     </div>
   );
 }

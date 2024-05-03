@@ -4,12 +4,15 @@ import SelectInput from "@/components/form-input/SelectInput";
 import SubmitBtn from "@/components/form-input/SubmitBtn";
 import TextArea from "@/components/form-input/TextArea";
 import TextInput from "@/components/form-input/TextInput";
-import { makeApiRequest } from "@/lib/apiRequest";
+import { makeApiRequest, makePutRequest } from "@/lib/apiRequest";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-export default function NewWarehouse() {
+export default function NewWarehouse({ selectedData = {}, isUpdate = false }) {
+  console.log(selectedData);
+  const router = useRouter();
   const warehouseOption = [
     {
       title: "Main Warehouse",
@@ -86,19 +89,33 @@ export default function NewWarehouse() {
     watch,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: selectedData });
   const [loading, setLoading] = useState(false);
 
+  function redirect() {
+    router.replace("/dashboard-inventory/inventory/warehouse");
+  }
   async function onSubmit(data) {
     console.log(data);
     setLoading(true);
-    makeApiRequest(setLoading, "api/warehouse", data, "Warehouse", reset);
+    if (isUpdate) {
+      makePutRequest(
+        setLoading,
+        `api/warehouse/${selectedData.id}`,
+        data,
+        "warehouses",
+        redirect,
+        reset
+      );
+    } else {
+      makeApiRequest(setLoading, "api/warehouse", data, "Warehouse", reset);
+    }
   }
   return (
     <div className="justify-between w-full p-4 border-b border-gray-200 dark:border-gray-600">
       {/* Header */}
       <FormHeader
-        title="New Warehouse"
+        title={isUpdate ? "Update Warehouse" : "New Warehouse"}
         href="/dashboard-inventory/inventory/warehouse"
       />
       {/* Form */}
@@ -163,7 +180,10 @@ export default function NewWarehouse() {
               errors={errors}
               className="mt-4"
             />
-            <SubmitBtn isLoading={loading} title="Save New Warehouse" />
+            <SubmitBtn
+              isLoading={loading}
+              title={isUpdate ? "Update Warehouse" : "New Warehouse"}
+            />
           </form>
         </div>
       </div>

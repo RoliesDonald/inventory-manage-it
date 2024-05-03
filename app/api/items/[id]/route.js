@@ -1,11 +1,43 @@
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export async function POST(request) {
+export async function GET(request, { params: { id } }) {
+  try {
+    const itemData = await db.items.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        supplier: true,
+        warehouse: true,
+        brand: true,
+        unit: true,
+        category: true,
+      },
+    });
+    console.log(itemData);
+    return NextResponse.json(itemData);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      {
+        error,
+        message: "failed to get Item",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+}
+
+export async function PUT(request, { params: { id } }) {
   try {
     const itemData = await request.json();
-
-    const itemName = await db.items.create({
+    const item = await db.items.update({
+      where: {
+        id,
+      },
       data: {
         title: itemData.title,
         partNum: itemData.partNum,
@@ -30,43 +62,13 @@ export async function POST(request) {
       },
     });
 
-    return NextResponse.json(itemName);
+    return NextResponse.json(item);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
         error,
-        message: "failed to create New Item",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
-}
-
-export async function GET(request) {
-  try {
-    const itemData = await db.items.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-      include: {
-        supplier: true,
-        warehouse: true,
-        brand: true,
-        unit: true,
-        category: true,
-      },
-    });
-
-    return NextResponse.json(itemData);
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json(
-      {
-        error,
-        message: "failed to get Item Data",
+        message: "failed to update Item",
       },
       {
         status: 500,

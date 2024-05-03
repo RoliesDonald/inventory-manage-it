@@ -13,7 +13,7 @@ export default async function Units() {
         title="Units"
         href="/dashboard-inventory/inventory/unit/new"
       />
-      <DataTable data={unit} columns={columns} />
+      <DataTable data={unit} columns={columns} sourceItem="unit" />
     </div>
   );
 }

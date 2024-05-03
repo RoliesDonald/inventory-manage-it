@@ -1,10 +1,35 @@
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export async function POST(request) {
+export async function GET(request, { params: { id } }) {
+  try {
+    const category = await db.category.findUnique({
+      where: {
+        id,
+      },
+    });
+    return NextResponse.json(category);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      {
+        error,
+        message: "failed to get Category",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+}
+
+export async function PUT(request, { params: { id } }) {
   try {
     const { title, description } = await request.json();
-    const category = await db.category.create({
+    const category = await db.category.update({
+      where: {
+        id,
+      },
       data: {
         title,
         description,
@@ -17,30 +42,7 @@ export async function POST(request) {
     return NextResponse.json(
       {
         error,
-        message: "failed to create Category",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
-}
-
-export async function GET(request) {
-  try {
-    const categories = await db.category.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-    // console.log(categories);
-    return NextResponse.json(categories);
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json(
-      {
-        error,
-        message: "failed to get Categories",
+        message: "failed to update Category",
       },
       {
         status: 500,

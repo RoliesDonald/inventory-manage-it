@@ -4,12 +4,15 @@ import SelectInput from "@/components/form-input/SelectInput";
 import SubmitBtn from "@/components/form-input/SubmitBtn";
 import TextArea from "@/components/form-input/TextArea";
 import TextInput from "@/components/form-input/TextInput";
-import { makeApiRequest } from "@/lib/apiRequest";
+import { makeApiRequest, makePutRequest } from "@/lib/apiRequest";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-export default function NewSupplier() {
+export default function NewSupplier({ selectedData = {}, isUpdate = false }) {
+  console.log(selectedData);
+  const router = useRouter();
   const province = [
     {
       label: "DKI Jakarta",
@@ -59,20 +62,33 @@ export default function NewSupplier() {
     watch,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: selectedData });
   const [loading, setLoading] = useState(false);
 
+  function redirect() {
+    router.replace("/dashboard-inventory/inventory/supplier");
+  }
   async function onSubmit(data) {
     console.log(data);
     setLoading(true);
-    const baseURL = "http://localhost:3000";
-    makeApiRequest(setLoading, "api/supplier", data, "Supplier", reset);
+    if (isUpdate) {
+      makePutRequest(
+        setLoading,
+        `api/supplier/${selectedData.id}`,
+        data,
+        "supplier",
+        redirect,
+        reset
+      );
+    } else {
+      makeApiRequest(setLoading, "api/supplier", data, "Supplier", reset);
+    }
   }
   return (
     <div className="justify-between w-full p-4 ">
       {/* Header */}
       <FormHeader
-        title="Supplier"
+        title={isUpdate ? " Update Supplier" : "New Supplier"}
         href="/dashboard-inventory/inventory/supplier"
       />
       {/* Form */}
@@ -189,7 +205,10 @@ export default function NewSupplier() {
                 className="mt-4"
               />
             </div>
-            <SubmitBtn isLoading={loading} title="Save New Warehouse" />
+            <SubmitBtn
+              isLoading={loading}
+              title={isUpdate ? "Update Supplier" : "New Supplier"}
+            />
           </form>
         </div>
       </div>

@@ -13,7 +13,7 @@ export default async function Warehouses() {
         title="Warehouse"
         href="/dashboard-inventory/inventory/warehouse/new"
       />
-      <DataTable data={brand} columns={columns} />
+      <DataTable data={brand} columns={columns} sourceItem="warehouse" />
     </div>
   );
 }

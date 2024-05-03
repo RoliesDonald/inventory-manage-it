@@ -6,9 +6,11 @@ import TextInput from "@/components/form-input/TextInput";
 import UploadImage from "@/components/form-input/UploadImage";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { makeApiRequest } from "@/lib/apiRequest";
+import { makeApiRequest, makePutRequest } from "@/lib/apiRequest";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import SubmitBtn from "../form-input/SubmitBtn";
 
 export default function CreateItemForm({
   category,
@@ -16,8 +18,11 @@ export default function CreateItemForm({
   brand,
   warehouse,
   supplier,
+  selectedData = {},
+  isUpdate = false,
 }) {
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(selectedData.imageUrl);
+  const router = useRouter();
 
   const {
     register,
@@ -25,15 +30,30 @@ export default function CreateItemForm({
     watch,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: selectedData });
   const [loading, setLoading] = useState(false);
+
+  function redirect() {
+    router.push("/dashboard-inventory/inventory/items");
+  }
 
   async function onSubmit(data) {
     data.imageUrl = imageUrl;
     console.log(data);
     setLoading(true);
-    makeApiRequest(setLoading, "api/items", data, "Item", reset);
-    setImageUrl("");
+    if (isUpdate) {
+      makePutRequest(
+        setLoading,
+        `api/items/${selectedData.id}`,
+        data,
+        "Item",
+        redirect,
+        reset
+      );
+    } else {
+      makeApiRequest(setLoading, "api/items", data, "Item", reset);
+      setImageUrl("");
+    }
   }
   return (
     <div className="justify-between w-full border-b border-gray-200 dark:border-gray-600">
@@ -235,24 +255,10 @@ export default function CreateItemForm({
               endpoint="imageUploader"
             />
 
-            <button
-              type="submit"
-              className="w-full text-slate-50 inline-flex items-center justify-center bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-            >
-              <svg
-                className="mr-1 -ml-1 w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-              Save New Product
-            </button>
+            <SubmitBtn
+              isLoading={loading}
+              title={isUpdate ? "Update Item" : "New Item"}
+            />
           </form>
         </div>
       </div>
