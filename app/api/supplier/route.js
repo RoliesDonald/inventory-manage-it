@@ -73,3 +73,25 @@ export async function GET(request) {
     );
   }
 }
+
+export async function DELETE(request) {
+  // const searchParams = useSearchParams();
+  try {
+    const id = request.nextUrl.searchParams.get("id");
+    // console.log(id);
+    const deleteSupplier = await db.supplier.delete({
+      where: {
+        id,
+      },
+    });
+    return NextResponse.json(deleteSupplier);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { error, message: "failed to delete Brand" },
+      {
+        status: 500,
+      }
+    );
+  }
+}

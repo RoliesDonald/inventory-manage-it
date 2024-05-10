@@ -4,7 +4,7 @@ import { getData } from "@/lib/getData";
 import React from "react";
 
 export default async function Units() {
-  const unit = await getData("units");
+  const unit = await getData("unit");
 
   const columns = ["title", "abreviation"];
   return (

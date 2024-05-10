@@ -4,7 +4,7 @@ import { getData } from "@/lib/getData";
 import React from "react";
 
 export default async function Category() {
-  const categories = await getData("categories");
+  const categories = await getData("category");
 
   const columns = ["title", "description"];
   return (

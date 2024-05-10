@@ -31,14 +31,14 @@ export default function NewCategory({ selectedData = {}, isUpdate = false }) {
     if (isUpdate) {
       makePutRequest(
         setLoading,
-        `api/categories/${selectedData.id}`,
+        `api/category/${selectedData.id}`,
         data,
         "Category",
         redirect,
         reset
       );
     } else {
-      makeApiRequest(setLoading, "api/categories", data, "Category", reset);
+      makeApiRequest(setLoading, "api/category", data, "Category", reset);
     }
   }
   return (

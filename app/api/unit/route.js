@@ -47,3 +47,25 @@ export async function GET(request) {
     );
   }
 }
+
+export async function DELETE(request) {
+  // const searchParams = useSearchParams();
+  try {
+    const id = request.nextUrl.searchParams.get("id");
+    // console.log(id);
+    const deleteUnit = await db.unit.delete({
+      where: {
+        id,
+      },
+    });
+    return NextResponse.json(deleteUnit);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { error, message: "failed to delete Brand" },
+      {
+        status: 500,
+      }
+    );
+  }
+}
