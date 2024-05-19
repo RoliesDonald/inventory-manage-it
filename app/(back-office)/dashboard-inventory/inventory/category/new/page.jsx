@@ -52,9 +52,9 @@ export default function NewCategory({ selectedData = {}, isUpdate = false }) {
       <div className="relative py-2 w-full h-full md:h-auto">
         <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid gap-4 sm:grid-cols-1 sm:gap-4">
+            <div className="grid gap-4 sm:grid-cols-3 sm:gap-4">
               <TextInput
-                lable="Category Title"
+                lable="Category"
                 name="title"
                 register={register}
                 errors={errors}

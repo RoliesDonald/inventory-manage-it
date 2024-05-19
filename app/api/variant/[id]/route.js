@@ -3,18 +3,18 @@ import { NextResponse } from "next/server";
 
 export async function GET(request, { params: { id } }) {
   try {
-    const warehouse = await db.warehouse.findUnique({
+    const variant = await db.variant.findUnique({
       where: {
         id,
       },
     });
-    return NextResponse.json(warehouse);
+    return NextResponse.json(variant);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
         error,
-        message: "failed to get WareHouse",
+        message: "failed to get Variant",
       },
       {
         status: 500,
@@ -25,39 +25,24 @@ export async function GET(request, { params: { id } }) {
 
 export async function PUT(request, { params: { id } }) {
   try {
-    const {
-      title,
-      warehouseType,
-      stockQty,
-      province,
-      city,
-      distric,
-      subDistric,
-      detail,
-    } = await request.json();
-    const warehouse = await db.warehouse.update({
+    const { title, description } = await request.json();
+    const variant = await db.variant.update({
       where: {
         id,
       },
       data: {
         title,
-        warehouseType,
-        province,
-        stockQty: parseInt(stockQty),
-        city,
-        distric,
-        subDistric,
-        detail,
+        description,
       },
     });
-    console.log(warehouse);
-    return NextResponse.json(warehouse);
+    // console.log(variant);
+    return NextResponse.json(variant);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
         error,
-        message: "failed to update Unit",
+        message: "failed to update Variant",
       },
       {
         status: 500,

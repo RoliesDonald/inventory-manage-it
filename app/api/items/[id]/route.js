@@ -15,7 +15,7 @@ export async function GET(request, { params: { id } }) {
         category: true,
       },
     });
-    console.log(itemData);
+    // console.log(itemData);
     return NextResponse.json(itemData);
   } catch (error) {
     console.log(error);

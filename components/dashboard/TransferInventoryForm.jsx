@@ -7,12 +7,7 @@ import { makeApiRequest } from "@/lib/apiRequest";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export default function TransferInventoryForm({
-  items,
-  warehouse,
-  brands,
-  category,
-}) {
+export default function TransferInventoryForm({ items, warehouse }) {
   const {
     register,
     handleSubmit,
@@ -25,7 +20,7 @@ export default function TransferInventoryForm({
   async function onSubmit(data) {
     console.log(data);
     setLoading(true);
-    makeApiRequest(setLoading, "api/adjustment/transfer", data, "Trans", reset);
+    makeApiRequest(setLoading, "api/adjustment/transfer", data, "trans", reset);
   }
 
   return (
@@ -40,7 +35,7 @@ export default function TransferInventoryForm({
             </h2>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-2 py-4">
-            <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:gap-8">
+            <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 sm:gap-8">
               <TextInput
                 lable="Date"
                 name="refNum"

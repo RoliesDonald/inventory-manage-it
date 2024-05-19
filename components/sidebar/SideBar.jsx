@@ -11,6 +11,7 @@ import {
   File,
   X,
 } from "lucide-react";
+import { FaDatabase } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
 import SubsribtionCard from "../dashboard/SubsribtionCard";
@@ -23,6 +24,16 @@ export default function SideBar({ showSideBar, setShowSideBar }) {
       title: "Category",
       href: "/dashboard-inventory/inventory/category",
       newhref: "/dashboard-inventory/inventory/category/new",
+    },
+    {
+      title: "Type",
+      href: "/dashboard-inventory/inventory/type",
+      newhref: "/dashboard-inventory/inventory/type/new",
+    },
+    {
+      title: "Variant",
+      href: "/dashboard-inventory/inventory/variant",
+      newhref: "/dashboard-inventory/inventory/variant/new",
     },
     {
       title: "Brands",
@@ -196,9 +207,9 @@ export default function SideBar({ showSideBar, setShowSideBar }) {
           <span>Home</span>
         </Link>
         <SideBarDropDown
-          title="Inventory"
+          title="Master Data"
           items={inventoryLink}
-          icon={BaggageClaim}
+          icon={FaDatabase}
           setShowSideBar={setShowSideBar}
         />
         <SideBarDropDown title="Sales" items={salesLink} icon={ShoppingCart} />

@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-export default function NewUnit({ selectedData = {}, isUpdate = false }) {
+export default function NewCategory({ selectedData = {}, isUpdate = false }) {
   console.log(selectedData);
   const router = useRouter();
   const {
@@ -22,57 +22,55 @@ export default function NewUnit({ selectedData = {}, isUpdate = false }) {
   const [loading, setLoading] = useState(false);
 
   function redirect() {
-    router.replace("/dashboard-inventory/inventory/unit");
+    router.replace("/dashboard-inventory/inventory/type");
   }
+
   async function onSubmit(data) {
     console.log(data);
     setLoading(true);
     if (isUpdate) {
-      // update data
       makePutRequest(
         setLoading,
-        `api/unit/${selectedData.id}`,
+        `api/type/${selectedData.id}`,
         data,
-        "unit",
+        "Category",
         redirect,
         reset
       );
     } else {
-      // post data
-      makeApiRequest(setLoading, "api/unit", data, "Unit", reset);
+      makeApiRequest(setLoading, "api/type", data, "Type", reset);
     }
   }
   return (
-    <div className="justify-between w-full p-4 border-b border-gray-200 dark:border-gray-600">
+    <div className="justify-between w-full p-4">
       {/* Header */}
       <FormHeader
-        title={isUpdate ? "Update Unit" : "New Unit"}
-        href="/dashboard-inventory/inventory/unit"
+        title={isUpdate ? "Update Type" : "New Type"}
+        href="/dashboard-inventory/inventory/type"
       />
       {/* Form */}
       <div className="relative py-2 w-full h-full md:h-auto">
         <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid gap-4 sm:grid-cols-1 sm:gap-4">
+            <div className="grid gap-4 sm:grid-cols-3 sm:gap-4">
               <TextInput
-                lable="Unit Name"
+                lable="Type"
                 name="title"
                 register={register}
                 errors={errors}
               />
             </div>
 
-            <TextInput
-              lable="Abreviation"
-              name="abreviation"
+            <TextArea
+              label="Description"
+              name="description"
               register={register}
               errors={errors}
               className="mt-4"
-              isRequired="true"
             />
             <SubmitBtn
               isLoading={loading}
-              title={isUpdate ? "Updated Brand" : "New Brand"}
+              title={isUpdate ? "Update Type" : "New Type"}
             />
           </form>
         </div>

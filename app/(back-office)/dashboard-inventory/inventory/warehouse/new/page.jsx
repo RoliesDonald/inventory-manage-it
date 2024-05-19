@@ -22,6 +22,10 @@ export default function NewWarehouse({ selectedData = {}, isUpdate = false }) {
       title: "Branch Warehouse",
       value: "Branch Warehouse",
     },
+    {
+      title: "Mobile Warehouse",
+      value: "Mobile Warehouse",
+    },
   ];
 
   const province = [
@@ -37,6 +41,10 @@ export default function NewWarehouse({ selectedData = {}, isUpdate = false }) {
       title: "Jawa Barat",
       value: "Jawa Barat",
     },
+    {
+      title: "Jawa Timur",
+      value: "Jawa Timur",
+    },
   ];
 
   const city = [
@@ -48,9 +56,14 @@ export default function NewWarehouse({ selectedData = {}, isUpdate = false }) {
       title: "Semarang",
       value: "Semarang",
     },
+
     {
-      title: "Bandung",
-      value: "Bandung",
+      title: "Surabaya",
+      value: "Surabaya",
+    },
+    {
+      title: "Kab.Sidoarjo",
+      value: "Kab.Sidoarjo",
     },
   ];
 
@@ -64,8 +77,16 @@ export default function NewWarehouse({ selectedData = {}, isUpdate = false }) {
       value: "Kp. Melayu",
     },
     {
+      title: "Ngaliyan",
+      value: "Ngaliyan",
+    },
+    {
       title: "Cicaheum",
       value: "Cicaheum",
+    },
+    {
+      title: "Candi",
+      value: "Candi",
     },
   ];
   const subDistric = [
@@ -80,6 +101,14 @@ export default function NewWarehouse({ selectedData = {}, isUpdate = false }) {
     {
       title: "Tegalega",
       value: "Tegalega",
+    },
+    {
+      title: "Podorejo",
+      value: "Podorejo",
+    },
+    {
+      title: "Citra Sentosa Mandiri",
+      value: "Citra Sentosa Mandiri",
     },
   ];
 
@@ -129,6 +158,15 @@ export default function NewWarehouse({ selectedData = {}, isUpdate = false }) {
                 register={register}
                 errors={errors}
                 className="w-full"
+              />
+              <TextInput
+                lable="Stock"
+                name="stockQty"
+                register={register}
+                isRequired="true"
+                type="number"
+                className="xs:col-span-2"
+                errors={errors}
               />
               <SelectInput
                 label="Warehouse Type"

@@ -6,7 +6,7 @@ import React from "react";
 export default async function Warehouses() {
   const brand = await getData("warehouse");
 
-  const columns = ["title", "warehouseType", "city"];
+  const columns = ["title", "warehouseType", "city", "stockQty"];
   return (
     <div className="justify-between w-full p-4">
       <HeaderList

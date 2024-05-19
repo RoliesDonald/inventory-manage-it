@@ -5,12 +5,35 @@ export async function POST(request) {
   try {
     const itemData = await request.json();
 
+    //get the warehouse
+    const warehouse = await db.warehouse.findUnique({
+      where: {
+        id: itemData.warehouseId,
+      },
+    });
+
+    // get current stock of the warehouse
+    const currentWarehouseStock = warehouse.stockQty;
+    const newStockQty =
+      parseInt(currentWarehouseStock) + parseInt(itemData.quantity);
+    // update the stock on the warehouse
+    const updatedWarehouseStock = await db.warehouse.update({
+      where: {
+        id: itemData.warehouseId,
+      },
+      data: {
+        stockQty: newStockQty,
+      },
+    });
+
     const itemName = await db.items.create({
       data: {
         title: itemData.title,
         partNum: itemData.partNum,
         brandId: itemData.brandId,
         categoryId: itemData.categoryId,
+        typeId: itemData.typeId,
+        variantId: itemData.variantId,
         barcode: itemData.barcode,
         sku: itemData.sku,
         quantity: parseInt(itemData.quantity),
@@ -57,6 +80,8 @@ export async function GET(request) {
         brand: true,
         unit: true,
         category: true,
+        type: true,
+        variant: true,
       },
     });
 

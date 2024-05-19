@@ -14,6 +14,8 @@ import SubmitBtn from "../form-input/SubmitBtn";
 
 export default function CreateItemForm({
   category,
+  type,
+  variant,
   unit,
   brand,
   warehouse,
@@ -36,10 +38,10 @@ export default function CreateItemForm({
   function redirect() {
     router.push("/dashboard-inventory/inventory/items");
   }
-
+  console.log(isUpdate);
   async function onSubmit(data) {
     data.imageUrl = imageUrl;
-    console.log(data);
+    // console.log(data);
     setLoading(true);
     if (isUpdate) {
       makePutRequest(
@@ -93,6 +95,20 @@ export default function CreateItemForm({
                 register={register}
                 className="w-full"
                 options={category}
+              />
+              <SelectInput
+                label="Type"
+                name="typeId"
+                register={register}
+                className="w-full"
+                options={type}
+              />
+              <SelectInput
+                label="Variant"
+                name="variantId"
+                register={register}
+                className="w-full"
+                options={variant}
               />
               <TextInput
                 lable="Barcode"
@@ -257,7 +273,7 @@ export default function CreateItemForm({
 
             <SubmitBtn
               isLoading={loading}
-              title={isUpdate ? "Update Item" : "New Item"}
+              title={isUpdate ? "Updated Item" : "New Item"}
             />
           </form>
         </div>

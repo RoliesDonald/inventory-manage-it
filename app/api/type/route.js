@@ -1,38 +1,24 @@
 import db from "@/lib/db";
+import { useSearchParams } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
-    const {
-      title,
-      warehouseType,
-      stockQty,
-      province,
-      city,
-      distric,
-      subDistric,
-      detail,
-    } = await request.json();
-    const warehouse = await db.warehouse.create({
+    const { title, description } = await request.json();
+    const type = await db.type.create({
       data: {
         title,
-        warehouseType,
-        stockQty: parseInt(stockQty),
-        province,
-        city,
-        distric,
-        subDistric,
-        detail,
+        description,
       },
     });
-    // console.log(warehouse);
-    return NextResponse.json(warehouse);
+    // console.log(type);
+    return NextResponse.json(type);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
         error,
-        message: "failed to create Warehouse",
+        message: "failed to create Category",
       },
       {
         status: 500,
@@ -43,19 +29,19 @@ export async function POST(request) {
 
 export async function GET(request) {
   try {
-    const warehouse = await db.warehouse.findMany({
+    const type = await db.type.findMany({
       orderBy: {
         createdAt: "desc",
       },
     });
-    // console.log(warehouse);
-    return NextResponse.json(warehouse);
+    // console.log(type);
+    return NextResponse.json(type);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
         error,
-        message: "failed to get Warehouse Data",
+        message: "failed to get Type",
       },
       {
         status: 500,
@@ -69,16 +55,16 @@ export async function DELETE(request) {
   try {
     const id = request.nextUrl.searchParams.get("id");
     // console.log(id);
-    const deleteWarehouse = await db.warehouse.delete({
+    const deleteType = await db.type.delete({
       where: {
         id,
       },
     });
-    return NextResponse.json(deleteWarehouse);
+    return NextResponse.json(deleteType);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
-      { error, message: "failed to delete Brand" },
+      { error, message: "failed to delete Categories" },
       {
         status: 500,
       }

@@ -2,7 +2,6 @@
 import FIxHeader from "@/components/dashboard/FIxHeader";
 import React from "react";
 import piston from "@/public/images/piston.png";
-
 import OptionCard from "@/components/others/OptionCard";
 import DataTable from "@/components/dashboard/DataTable";
 import { getData } from "@/lib/getData";
@@ -15,8 +14,8 @@ export default async function Items() {
     "partNum",
     "brand.title",
     "category.title",
-    "buyPrice",
-    "sellPrice",
+    "quantity",
+    "variant.title",
   ];
   // const optionCards = [
   //   {

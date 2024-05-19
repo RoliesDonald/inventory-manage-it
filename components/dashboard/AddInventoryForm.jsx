@@ -14,6 +14,7 @@ export default function AddInventoryForm({
   warehouse,
   brands,
   category,
+  supplier,
 }) {
   const {
     register,
@@ -42,7 +43,7 @@ export default function AddInventoryForm({
             </h2>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-2 py-4">
-            <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:gap-8">
+            <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 sm:gap-8">
               <TextInput
                 lable="Date"
                 name="refNum"
@@ -73,6 +74,14 @@ export default function AddInventoryForm({
                 errors={errors}
                 className="w-full"
                 options={items}
+              />
+              <SelectInput
+                label="Select Supplier"
+                name="supplierId"
+                register={register}
+                errors={errors}
+                className="w-full"
+                options={supplier}
               />
               <TextInput
                 lable="Amount to Add"
